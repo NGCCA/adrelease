@@ -1,0 +1,52 @@
+{% extends 'myadmin/common/layout.html' %}
+
+{% block content %}
+
+<div class="container-xxl flex-grow-1 container-p-y">
+              <!-- <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Basic Tables</h4> -->
+
+              <!-- Basic Bootstrap Table -->
+              <div class="card">
+                <h5 class="card-header">All Orders</h5>
+                <form action="" method="post">
+                            {% csrf_token %}
+                            Form:-<input type="text" name="from_date" id="from_date" class="mydate" value="{{f}}" autocomplete="off" >
+                            &nbsp;&nbsp;
+                            to:-<input type="text" name="to_date" id="to_date" class="mydate" value="{{t}}" autocomplete="off">
+                            &nbsp;&nbsp;
+                            <input type="submit" id="submit" name="submit" value="Search" class="btn btn-primary">
+                            <a href="/myadmin/pdf1/" class="btn btn-primary">Export</a>
+        </form>
+                <div class="table-responsive text-nowrap">
+                  <table class="table">
+                    <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Customer Name</th>
+                                <th>Total Price</th>
+                                <th>Date</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                           
+                                {% for ord in all_order%}
+                                <tr>
+                                    <td>{{ord.id}}</td>
+                                    <td>{{ord.customers.user.username}}</td>
+                                    <td>{{ord.price}}</td>
+                                    <td>{{ord.date}}</td>
+                                </tr>
+                                {% endfor %}
+                            
+         </tbody>
+                  </table>
+                </div>
+              </div>
+              <!--/ Basic Bootstrap Table -->
+
+              
+              <!--/ Responsive Table -->
+            </div>
+
+{% endblock %}
